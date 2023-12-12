@@ -18,7 +18,8 @@ char	*ft_strcpy (char *dest, const char *src);
 char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlen(const char *str);
 t_list	*ft_lstnew(void	*content);
-void	ft_lstadd_front(t_list **lst, t_list new);
+void	ft_lstadd_front(t_list **lst, t_list *new);
+void	ft_lstadd_back(t_list **lst, t_list *new)i;
 
 
 

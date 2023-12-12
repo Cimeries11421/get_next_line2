@@ -11,7 +11,7 @@ t_list	*ft_lstnew(void	*content)
 	new->next = NULL;
 	return (new);
 }
-void	ft_lstadd_front(t_list **lst, t_list new)
+void	ft_lstadd_front(t_list **lst, t_list *new)
 {
 	if(*lst)
 
@@ -29,6 +29,28 @@ int	ft_lstsize(t_list *lst)
 		i++;
 	}
 	return (i);
+}
+void	ft_lstadd_back(t_list **lst, t_list *new)
+{
+	while((*lst)->next != NULL)
+		*lst = (*lst)->next;  //étoile dans la parenthèse pour pas déréferencer lst->ext 
+	(*lst)->next = new;
+}
+
+
+void	main(void)
+{
+	t_list *lst;
+	t_list *new;
+	
+	lst = ft_lstnew("bobie");
+	new = ft_lstnew("bob");
+	ft_lstadd_back(&lst, new);
+	while(lst != NULL)
+	{
+		printf("%s", (char*)lst->content);
+		lst = lst->next; 
+	}
 }
 
 char	*ft_strcpy(char *dest, const char *src)
