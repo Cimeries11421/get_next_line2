@@ -1,6 +1,6 @@
 #include "get_next_line.h"
 
-t_list	*ft_lstnew(void	*content)
+/*t_list	*ft_lstnew(void	*content)
 {
 	t_list	*new;
 
@@ -52,7 +52,7 @@ void	main(void)
 		lst = lst->next; 
 	}
 }
-
+*/
 char	*ft_strcpy(char *dest, const char *src)
 {
 	unsigned int i;
@@ -66,6 +66,19 @@ char	*ft_strcpy(char *dest, const char *src)
 	dest[i] = src[i];
 	return (dest);
 }
+
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s && *s != (unsigned char)c)
+		s++;
+	if ((unsigned char)c == '\0')
+		return ((char *)s);
+	if (!*s)
+		return (NULL);
+	return ((char *)s);
+}
+
+
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*s3;
