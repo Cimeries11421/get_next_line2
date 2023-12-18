@@ -1,6 +1,8 @@
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-# define BUFFER_SIZE 4
+#ifndef BUFFER_SIZE 
+# define BUFFER_SIZE 1
+# endif
 
 #include <fcntl.h>
 #include <unistd.h>
@@ -17,7 +19,7 @@
 char	*get_next_line(int fd);
 char	*ft_strcpy (char *dest, const char *src);
 char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen(const char *str);
+size_t	ft_strlen_n(const char *str);
 //t_list	*ft_lstnew(void	*content);
 //void	ft_lstadd_front(t_list **lst, t_list new);
 //int		ft_lstsize(t_list *lst);

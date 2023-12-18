@@ -13,41 +13,75 @@ char	*clear_buffer(char *buff)
 	}
 	return (buff);
 }
+char	*recover_line(char *buff, char *tmp)
+{
+	size_t	len;
+	size_t	i;
 
-char *get_next_line(int fd)
+	free(tmp);
+	len = ft_strlen_n(buff);
+	tmp = malloc(len * sizeof(char));
+	i = 0;
+	while (buff[i])
+	{
+		tmp[i] = buff[i];
+		i++;
+	}
+	return (tmp);
+}
+char	*get_next_line(int fd)
 {
 	ssize_t	read_size;
 	size_t	i;
-	static char	buff[BUFFER_SIZE];
+	static char	buff[BUFFER_SIZE] = {'\0'};
 	char	*str;
 	char	*tmp;
 
 	read_size = 1;
 	str = malloc(BUFFER_SIZE * sizeof(char));
+	tmp = malloc(BUFFER_SIZE * sizeof(char));
+	if (buff[0] != '\0')
+		tmp = recover_line(buff, tmp);
 	i = 0;
 	while(read_size > 0)
 	{ 
 		read_size = read(fd, buff, BUFFER_SIZE);
-		//printf("read_size = %ld\n",read_size);
 		buff[BUFFER_SIZE + 1] = '\0'; 
-		//printf("buff = %s\n\n", buff);
-		if (ft_strchr(buff, '\n'))
+		str = ft_strjoin(tmp, buff);
+		free(tmp);
+		tmp = strdup(str);
+	if (ft_strchr(buff, '\n'))
 			break;
-		str = ft_strjoin(str, buff);
 	}
 	clear_buffer(buff);
-	printf("%s\n", buff);
+	printf("buff = %s\n", buff);
 	return (str);
 }
 int	main(void)
 {
 	
-	//static char	buff[4] =  "ns\nU";
-	int		fd = open("text.txt", O_RDONLY);
-	char	*str = get_next_line(fd);
-	printf("%s", str);
-	//printf("%s", clear_buffer(buff));
+	/******* TEST RECOVER LINE *************
 
+	char	s[] = "coucou";
+	char	*s2 = '\0'; 
+	s2 = recover_line(s, s2);
+	printf("%s", s2);
+
+	****************************************/	
+	
+	/************TEST GET NEXT LINE**********/
+	
+	printf("BUFFER_SIZE = %d\n", BUFFER_SIZE);
+	int		fd = open("text.txt", O_RDONLY);
+	char	*line;
+	size_t	i = 3;
+
+	while (i--)
+	{
+		line = get_next_line(fd);
+		printf("%s", line);
+	}
+	//printf("%s", clear_buffer(buff));*/
 	return 0;
 }
 
