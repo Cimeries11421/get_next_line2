@@ -1,53 +1,32 @@
 #include "get_next_line.h"
 
-
-char	*ft_strdup(const char *s)
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	size_t		len_s;
-	size_t		i;
-	char		*s2;
+	size_t	i;
 
-	len_s = ft_strlen_n((char *)s);
-	s2 = malloc(len_s + 1 * sizeof(char));
-	if (s2 == NULL)
+	if (dest == NULL && src == NULL)
 		return (NULL);
-	i = 0;
-	while (i < len_s + 1)
+	if (dest > src)
 	{
-		s2[i] = s[i];
-		i++;
+		i = n - 1;
+		while (n--)
+		{
+			((char *)dest)[i] = ((char *)src)[i];
+			i--;
+		}
 	}
-	return (s2);
-}
-
-char	*ft_strcpy(char *dest, const char *src)
-{
-	unsigned int i;
-
-	i = 0;
-	while (src[i] != '\0')
+	else
 	{
-		dest[i] = src[i];
-		i++;
-	}
-	while (dest[i])
-	{
-		dest[i] = '\0';
-		i++;
+		i = 0;
+		while (n--)
+		{
+			((char *)dest)[i] = ((char *)src)[i];
+			i++;
+		}
 	}
 	return (dest);
 }
 
-char	*ft_strchr(const char *s, int c)
-{
-	while (*s && *s != (unsigned char)c)
-		s++;
-	if ((unsigned char)c == '\0')
-		return ((char *)s);
-	if (!*s)
-		return (NULL);
-	return ((char *)s);
-}
 size_t	ft_strlen_n(const	char *s)
 {
 	size_t	i;
@@ -62,7 +41,7 @@ size_t	ft_strlen_n(const	char *s)
 	return (i);
 }
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin_n(char const *s1, char const *s2)
 {
 	char	*s3;
 	size_t	len;
@@ -87,13 +66,33 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	s3[i] = '\0';
 	return (s3);
 }
-/*int	main(void)
+
+char	*ft_strchr(const char *s, int c)
 {
-	char 	*tmp = "Coucou";
-	char	*buff = " les pigeons\n";
+	while (*s && *s != (unsigned char)c)
+		s++;
+	if ((unsigned char)c == '\0')
+		return ((char *)s);
+	if (!*s)
+		return (NULL);
+	return ((char *)s);
+}
 
-	//printf("len = %ld", ft_strlen_n(buff));
-	char	*str = ft_strjoin(tmp, buff);
-	printf("%s_", str);
-}*/
+char	*ft_strdup(const char *s)
+{
+	size_t		len_s;
+	size_t		i;
+	char		*s2;
 
+	len_s = ft_strlen_n((char *)s);
+	s2 = malloc(len_s + 1 * sizeof(char));
+	if (s2 == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len_s + 1)
+	{
+		s2[i] = s[i];
+		i++;
+	}
+	return (s2);
+}
