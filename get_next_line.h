@@ -19,10 +19,8 @@
 char	*get_next_line(int fd);
 char	*ft_strcpy (char *dest, const char *src);
 char	*ft_strjoin(char const *s1, char const *s2);
-size_t	ft_strlen_n(const char *str);
-//t_list	*ft_lstnew(void	*content);
-//void	ft_lstadd_front(t_list **lst, t_list new);
-//int		ft_lstsize(t_list *lst);
 char	*ft_strchr(const char *s, int c);
+size_t	ft_strlen_n(const char *str);
+char	*ft_strdup(const char *s);
 
 #endif

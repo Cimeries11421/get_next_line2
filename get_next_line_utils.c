@@ -1,5 +1,25 @@
 #include "get_next_line.h"
 
+
+char	*ft_strdup(const char *s)
+{
+	size_t		len_s;
+	size_t		i;
+	char		*s2;
+
+	len_s = ft_strlen_n((char *)s);
+	s2 = malloc(len_s + 1 * sizeof(char));
+	if (s2 == NULL)
+		return (NULL);
+	i = 0;
+	while (i < len_s + 1)
+	{
+		s2[i] = s[i];
+		i++;
+	}
+	return (s2);
+}
+
 char	*ft_strcpy(char *dest, const char *src)
 {
 	unsigned int i;
@@ -10,7 +30,11 @@ char	*ft_strcpy(char *dest, const char *src)
 		dest[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
+	while (dest[i])
+	{
+		dest[i] = '\0';
+		i++;
+	}
 	return (dest);
 }
 
